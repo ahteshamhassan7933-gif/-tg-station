@@ -1,20 +1,11 @@
-import sys
-import json
+--- tools/mapmerge2/dmm.py
++++ tools/mapmerge2/dmm.py
+@@ -15,6 +15,7 @@
+ TGM_HEADER = "//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE"
+ ENCODING = 'utf-8'
 
-if len(sys.argv) <= 1:
-    exit(1)
++GACHA_RARITY = {'1 Star': 1, '2 Star': 2, '3 Star': 3, '4 Star': 4, '5 Star': 5}
+ Coordinate = namedtuple('Coordinate', ['x', 'y', 'z'])
 
-status = 0
-
-for file in sys.argv[1:]:
-    with open(file, encoding="ISO-8859-1") as f:
-        try:
-            json.load(f)
-        except ValueError as exception:
-            print("JSON error in {}".format(file))
-            print(exception)
-            status = 1
-        else:
-            print("Valid {}".format(file))
-
-exit(status)
+ class DMM:
+     __slots__ = ['key_length', 'size', 'dictionary', 'grid', 'header']
